@@ -1,5 +1,5 @@
 server:
-  port: 8888
+  port: 10003
 # ssl:
 #    enabled: true
 #    key-store: /keystore.jks
