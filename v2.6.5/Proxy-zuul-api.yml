@@ -1,0 +1,272 @@
+server:
+  port: 10003
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10002/eureka/
+
+spring:
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+        
+logging:
+  pattern: 
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+  #file: zuul.log
+  file: /var/kido/logs/zuul.log
+              
+zuul:
+  routes:
+    userservice:
+      path: /v2-6-5/userservice/**
+      serviceId: User-service-v2.6.5
+      stripPrefix: true
+    productservice:
+      path: /v2-6-5/productservice/**
+      serviceId: Product-service-v2.6.5
+      stripPrefix: true
+    orderservice:
+      path: /v2-6-5/orderservice/**
+      serviceId: Order-service-v2.6.5
+      stripPrefix: true
+    newsservice:
+      path: /v2-6-5/newsservice/**
+      serviceId: News-service-v2.6.5
+      stripPrefix: true
+    eventservice:
+      path: /v2-6-5/eventservice/**
+      serviceId: Event-service-v2.6.5
+      stripPrefix: true
+    shipperservice:
+      path: /v2-6-5/shipperservice/**
+      serviceId: Shipper-service-v2.6.5
+      stripPrefix: true
+    searchservice:
+      path: /v2-6-5/searchservice/**
+      serviceId: Search-service-v2.6.5
+      stripPrefix: true
+    salemanservice:
+      path: /v2-6-5/saleservice/**
+      serviceId: Saleman-service-v2.6.5
+      stripPrefix: true
+  retryable: true
+  #ribbonIsolationStrategy:THREAD
+  ribbon:
+    eager-load:
+      enabled: true
+  #semaphore:
+  #  max-semaphores: 5000
+  #eureka:
+  #  User-service:
+  #    semaphore:
+  #      maxSemaphores: 5000
+  #eureka:
+  #  Product-service:
+  #    semaphore:
+  #      maxSemaphores: 5000
+  #eureka:
+  #  Order-service:
+  #    semaphore:
+  #      maxSemaphores: 5000
+  #eureka:
+  #  News-service:
+  #    semaphore:
+  #      maxSemaphores: 5000
+ 
+
+hystrix:
+  command:
+    User-service-v2.6.5:
+      execution:
+        isolation:
+          strategy: THEARD
+          thread:
+            timeoutInMilliseconds: 120000
+    Product-service-v2.6.5:
+      execution:
+        isolation:       
+          strategy: THEARD
+          thread:
+            timeoutInMilliseconds: 120000
+    Order-service-v2.6.5:
+      execution:
+        isolation:
+          thread:
+          strategy: THEARD
+          thread:
+            timeoutInMilliseconds: 120000
+    News-service-v2.6.5:
+      execution:
+        isolation:
+          thread:
+          strategy: THEARD
+          thread:
+            timeoutInMilliseconds: 120000
+    Event-service-v2.6.5:
+      execution:
+        isolation:
+          thread:
+          strategy: THEARD
+          thread:
+            timeoutInMilliseconds: 120000
+    Shipper-service-v2.6.5:
+      execution:
+        isolation:
+          thread:
+          strategy: THEARD
+          thread:
+            timeoutInMilliseconds: 120000
+    Search-service-v2.6.5:
+      execution:
+        isolation:
+          thread:
+          strategy: THEARD
+          thread:
+            timeoutInMilliseconds: 120000
+    Saleman-service-v2.6.5:
+      execution:
+        isolation:
+          thread:
+          strategy: THEARD
+          thread:
+            timeoutInMilliseconds: 120000
+
+User-service-v2.6.5:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://localhost:33001
+    ConnectTimeout: 10000
+    ReadTimeout: 10000
+    MaxTotalHttpConnections: 2000
+    MaxConnectionsPerHost: 1000
+    maxAutoRetries: 3
+    MaxAutoRetriesNextServer: 3
+    OkToRetryOnAllOperations: true
+    ReadTimeout: 120000
+    ConnectTimeout: 10000
+    retryableStatusCodes: 404,502
+    eureka:
+      enabled: true
+    
+Product-service-v2.6.5:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://localhost:33011
+    ConnectTimeout: 10000
+    ReadTimeout: 10000
+    MaxTotalHttpConnections: 2000
+    MaxConnectionsPerHost: 1000
+    maxAutoRetries: 3
+    MaxAutoRetriesNextServer: 3
+    OkToRetryOnAllOperations: true
+    ReadTimeout: 120000
+    ConnectTimeout: 10000
+    retryableStatusCodes: 404,502
+    eureka:
+      enabled: true
+      
+Order-service-v2.6.5:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://localhost:33021
+    ConnectTimeout: 10000 
+    ReadTimeout: 10000
+    MaxTotalHttpConnections: 2000
+    MaxConnectionsPerHost: 1000
+    maxAutoRetries: 3
+    MaxAutoRetriesNextServer: 3
+    OkToRetryOnAllOperations: true
+    ReadTimeout: 120000
+    ConnectTimeout: 10000
+    retryableStatusCodes: 404,502
+    eureka:
+      enabled: true
+      
+News-service-v2.6.5:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://localhost:33031
+    ConnectTimeout: 10000
+    ReadTimeout: 10000
+    MaxTotalHttpConnections: 2000
+    MaxConnectionsPerHost: 1000
+    maxAutoRetries: 3
+    MaxAutoRetriesNextServer: 3
+    OkToRetryOnAllOperations: true
+    ReadTimeout: 120000
+    ConnectTimeout: 10000
+    retryableStatusCodes: 404,502
+    eureka:
+      enabled: true
+      
+Event-service-v2.6.5:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://localhost:33041
+    ConnectTimeout: 10000
+    ReadTimeout: 10000
+    MaxTotalHttpConnections: 2000
+    MaxConnectionsPerHost: 1000
+    maxAutoRetries: 3
+    MaxAutoRetriesNextServer: 3
+    OkToRetryOnAllOperations: true
+    ReadTimeout: 120000
+    ConnectTimeout: 10000
+    retryableStatusCodes: 404,502
+    eureka:
+      enabled: true
+
+Shipper-service-v2.6.5:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://localhost:33051
+    ConnectTimeout: 10000
+    ReadTimeout: 10000
+    MaxTotalHttpConnections: 2000
+    MaxConnectionsPerHost: 1000
+    maxAutoRetries: 3
+    MaxAutoRetriesNextServer: 3
+    OkToRetryOnAllOperations: true
+    ReadTimeout: 120000
+    ConnectTimeout: 10000
+    retryableStatusCodes: 404,502
+    eureka:
+      enabled: true
+
+Search-service-v2.6.5:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://localhost:33061
+    ConnectTimeout: 10000
+    ReadTimeout: 10000
+    MaxTotalHttpConnections: 2000
+    MaxConnectionsPerHost: 1000
+    maxAutoRetries: 3
+    MaxAutoRetriesNextServer: 3
+    OkToRetryOnAllOperations: true
+    ReadTimeout: 120000
+    ConnectTimeout: 10000
+    retryableStatusCodes: 404,502
+    eureka:
+      enabled: true
+      
+Saleman-service-v2.6.5:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://localhost:33071
+    ConnectTimeout: 10000
+    ReadTimeout: 10000
+    MaxTotalHttpConnections: 2000
+    MaxConnectionsPerHost: 1000
+    maxAutoRetries: 3
+    MaxAutoRetriesNextServer: 3
+    OkToRetryOnAllOperations: true
+    ReadTimeout: 120000
+    ConnectTimeout: 10000
+    retryableStatusCodes: 404,502
+    eureka:
+      enabled: true
