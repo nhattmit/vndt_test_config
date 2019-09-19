@@ -1,10 +1,17 @@
+
+spring:
+   application:
+      name: Event-service-v2.6.5
+      
 server:
   port: 33041
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:10002/eureka/
+      defaultZone: http://10.0.204.2:10002/eureka/
+  instance:
+    preferIpAddress: true
       
 logging:
   pattern: 
