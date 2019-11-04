@@ -257,7 +257,7 @@ Search-service-v2.6.5:
 Saleman-service-v2.6.5:
   ribbon:
     NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
-    listOfServers: http://10.0.204.2:33071, http://10.0.204.2:33072
+    #listOfServers: http://10.0.204.2:33071, http://10.0.204.2:33072
     ConnectTimeout: 10000
     ReadTimeout: 10000
     MaxTotalHttpConnections: 2000
